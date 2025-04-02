@@ -42,6 +42,11 @@ export class ChatController {
         users: this.chatRoomManager.getUsersInRoom(roomId),
       });
 
+      // Send message history to the new joiner
+      socket.emit("messageHistory", {
+        messages: room.messages,
+      });
+
       console.log(`User ${anonymousId} joined room ${roomId}`);
     });
 

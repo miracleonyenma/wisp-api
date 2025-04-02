@@ -4,11 +4,13 @@ import { Server } from "socket.io";
 import cors from "cors";
 import { v4 as uuidv4 } from "uuid";
 import { generatePortFromName } from "@untools/port-gen";
-
+import { formatIPUrl } from "@untools/ip-url";
+import { config } from "dotenv";
 import { ChatRoomManager } from "./services/chat/roomManager";
 import { NotificationService } from "./services/notification";
 import { ChatController } from "./controllers/chat";
-import { formatIPUrl } from "@untools/ip-url";
+
+config();
 
 const app = express();
 const server = http.createServer(app);

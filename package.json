@@ -1,5 +1,5 @@
 {
-  "name": "api",
+  "name": "wisp-api",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,7 @@
     "@untools/ip-url": "^0.1.0",
     "@untools/port-gen": "^0.0.2",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^5.1.0",
     "socket.io": "^4.8.1",
     "uuid": "^11.1.0",

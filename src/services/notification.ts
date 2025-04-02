@@ -1,5 +1,11 @@
 import webpush from "web-push";
 import { PushSubscription } from "../types";
+import { config } from "dotenv";
+
+config();
+
+const PUBLIC_VAPID_KEY = process.env.PUBLIC_VAPID_KEY;
+const PRIVATE_VAPID_KEY = process.env.PRIVATE_VAPID_KEY;
 
 export class NotificationService {
   private subscriptions: Map<string, PushSubscription[]>; // userId -> subscriptions
@@ -9,7 +15,12 @@ export class NotificationService {
 
     // Generate VAPID keys for web push
     // In production, these should be environment variables
-    const vapidKeys = webpush.generateVAPIDKeys();
+    const vapidKeys = {
+      publicKey: PUBLIC_VAPID_KEY || webpush.generateVAPIDKeys().publicKey,
+      privateKey: PRIVATE_VAPID_KEY || webpush.generateVAPIDKeys().privateKey,
+    };
+
+    console.log("VAPID keys generated:", vapidKeys);
 
     webpush.setVapidDetails(
       "mailto:hi@m10.live", // Change this to your email
