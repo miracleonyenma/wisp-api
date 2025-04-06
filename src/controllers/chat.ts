@@ -23,7 +23,7 @@ export class ChatController {
     console.log(`New connection: ${socket.id}`);
 
     // Join a room
-    socket.on("joinRoom", (roomId: string) => {
+    socket.on("joinRoom", (roomId: string, userId?: string) => {
       const room = this.chatRoomManager.getRoom(roomId);
 
       if (!room) {
@@ -31,7 +31,11 @@ export class ChatController {
         return;
       }
 
-      const anonymousId = this.chatRoomManager.addUserToRoom(roomId, socket.id);
+      const anonymousId = this.chatRoomManager.addUserToRoom(
+        roomId,
+        socket.id,
+        userId
+      );
       socket.join(roomId);
 
       // Notify others that a new user joined

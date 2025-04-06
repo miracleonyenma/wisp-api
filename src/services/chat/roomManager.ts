@@ -25,11 +25,15 @@ export class ChatRoomManager {
     return this.rooms.get(roomId);
   }
 
-  addUserToRoom(roomId: string, socketId: string): string | null {
+  addUserToRoom(
+    roomId: string,
+    socketId: string,
+    userId?: string
+  ): string | null {
     const room = this.getRoom(roomId);
     if (!room) return null;
 
-    const anonymousId = `anon-${Math.floor(Math.random() * 10000)}`;
+    const anonymousId = userId || `anon-${Math.floor(Math.random() * 10000)}`;
     room.users.set(socketId, anonymousId);
     return anonymousId;
   }
